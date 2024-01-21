@@ -1,85 +1,19 @@
-- title: "MonoNPHM: Dynamic Head Reconstruction from Monoculuar Videos"
-  image: MonoNPHM.gif
-  description: MonoNPHM is a neural parametric head model that disentangles geomery, appearance and facial expression into three separate latent spaces.
-                Using MonoNPHM as a prior, we tackle the task of dynamic 3D head reconstruction from monocular RGB videos, using inverse, SDF-based, volumetric rendering.
-
-
-  authors: Simon Giebenhain, Tobias Kirschstein, Markos Georgopoulos,  Martin Rünz,  Lourdes Agapito, Matthias Nießner
+- title: "Controllable Inversion of Black-Box Face Recognition Models via Diffusion"
+  image: id3pm.gif
+  conference: IEEE/CVF International Conference on Computer Vision (ICCV) Workshops, 2023
+  description: We tackle the challenging task of inverting the latent space of pre-trained face recognition models without full model access (i.e. black-box setting). Our method, the identity denoising diffusion probabilistic model (ID3PM), leverages the stochastic nature of the denoising diffusion process to produce high-quality, identity-preserving face images with various backgrounds, lighting, poses, and expressions.
+  authors: Manuel Kansy, Anton Raël (ETH Zurich), Graziana Mignone (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
-    url: https://simongiebenhain.github.io/MonoNPHM/
+    url: https://studios.disneyresearch.com/2023/10/02/controllable-inversion-of-black-box-face-recognition-models-via-diffusion/
     display: Project Page
   highlight: 1
 
-- title: "DiffusionAvatars: Deferred Diffusion for High-fidelity 3D Head Avatars"
-  image: DiffusionAvatars.gif
-  description: DiffusionAvatar uses diffusion-based, deferred neural rendering to translate geometric cues from an underlying neural parametric head model (NPHM) to photo-realistic renderings. 
-                The underlying NPHM prvides accurate control over facial expressions, while the deferred neural rendering leverages the 2D prior of StableDiffusion, in order to generate compeeling images.
-
-  authors: Tobias Kirschstein, Simon Giebenhain, Matthias Nießner
+- title: "Self-Supervised Effective Resolution Estimation with Adversarial Augmentations"
+  conference: IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops, 2023
+  image: eres.gif
+  description: The terms high-resolution and high-quality are not equivalent, and high-resolution does not always imply high-quality. In this paper, we motivate and precisely define the concept of effective resolution and propose a novel self-supervised learning scheme to train a neural network for effective resolution estimation. We demonstrate that our method outperforms state-of-the-art image quality assessment methods in estimating the sharpness of real and generated human faces, despite using only unlabeled data during training.
+  authors: Manuel Kansy, Julian Balletshofer (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Graziana Mignone (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
-    url: https://tobias-kirschstein.github.io/diffusion-avatars/
+    url: https://studios.disneyresearch.com/2023/01/03/self-supervised-effective-resolution-estimation-with-adversarial-augmentations/
     display: Project Page
   highlight: 1
-  
-- title: "NeRSemble: Multi-view Radiance Field Reconstruction of Human Heads"
-  image: nersemble.mp4
-  description: NeRSemble reconstructs high-fidelity dynamic-radiance fields of human heads.
-                We combine a deformation for coarse movments with an ensemble of 3D multi-resolution hash encodings, which act as a form of expression dependent volumetric texture that models fine-grained, expression-depndent details.
-                Additionally we propose a new 16 camera multi-view capture dataset (7.1 MP resolution and 73 frames per second) containing 4700 sequences of more than 220 human subjects. 
-  authors: Tobias Kirschstein, Shenhan Qian, Simon Giebenhain, Tim Walter, Matthias Nießner
-  link:
-    url: https://tobias-kirschstein.github.io/nersemble/
-    display: Project Page
-  highlight: 1
-  
-- title: "Learning Neural Parametric Head Models"
-  image: nphm.gif
-  description: NPHM is a field-based Neural parametric model for human heads, 
-               that represents identity geometry implicitly in a cononical space and models expressions as forward deformations.
-               The SDF in canonical field is represented as an ensemble of local MLPs centered around facial anchor points.
-               To train our model we capture a large dataset of complete head geometry containing over 250 people in 23 expressions each using high quality structured light scanners.
-  authors: Simon Giebenhain, Tobias Kirschstein, Markos Georgopoulos, Martin Rünz, Lourdes Agapito, Matthias Nießner
-  link:
-    url: https://simongiebenhain.github.io/NPHM/
-    display: Project Page
-  highlight: 1
-  
-- title: "Neural Puppeteer: Keypoint-Based Neural Rendering of Dynamic Shapes"
-  image: nepu.gif
-  description: In Neural Puppeteer (NePu) we explore single-evaluation-per-pixel neural rendering for dynamic objects. 
-                In particular we learn a latent space that relates the 3D pose of an object with multiple renderable properties, such as occupancy masks, color and depth.
-                The fast rendering speed allows us to tackle 3D keypoint detection by inverse rendering from multi-view sillhouettes.
-                Using silhouettes alone, we obtain an appearance and lightning invariant representation, that we can fit to real images, in a zero-shot-synthtetic-to-real scenario.
-  authors: Simon Giebenhain<sup>*</sup>, Urs Waldmann<sup>*</sup>, Ole Johannsen, and Bastian Goldluecke
-  link:
-    url: https://openaccess.thecvf.com/content/ACCV2022/papers/Giebenhain_Neural_Puppeteer_Keypoint-Based_Neural_Rendering_of_Dynamic_Shapes_ACCV_2022_paper.pdf
-    display: ACCV 2022
-  highlight: 1
-  news2: More information on our  [Project Page](https://urs-waldmann.github.io/NePu/).
-  
-- title: "AIR-Nets: An Attention-Based Framework for Locally Conditioned Implicit Representations"
-  image: anim.gif
-  description: AIR-Net is the first encoder-based, grid-free, local and implicit shape representation model.
-                Our network design focuses on conformity with geometric properties like 
-                permutation invariance and translation equivariance of the point cloud. 
-                Furthermore, our network operates on the k-nearest-neighbor graph, which encodes an effective and efficient inductive bias.
-                Using an expressive decoder, we are able to condition an implicit function on a sparse set of local latent vectors.
-                While this simple latent representation certainly offers exciting avenues for future work, our model already outperforms the previous state-of-the-art.
-  authors: Simon Giebenhain and Bastian Goldlücke
-  link:
-    url: https://arxiv.org/abs/2110.11860
-    display: IEEE International Conference on 3D Vision (2021)
-  highlight: 1
-  news2: Code available  [here](https://github.com/SimonGiebenhain/AIR-Nets).
-
-- title: "Radar Ghost Target Detection via Multimodal Transformers"
-  image: iros21.png
-  description: The safety of autonmous vehicles is heavily dependent on the reliability of its underlying sensor measurements.
-                While radar is often overlooked, its all-day, all-weather and long-range capabilities, as well as, low price render it a promising candidate.
-                In this paper we introduce an attention based sensor-fusion method, to filter out false-positive detections (so called ghost targets) in radar.
-  authors: LeiChen Wang, Simon Giebenhain, Carsten Anklam, Bastian Goldlücke
-  link:
-    url: https://ieeexplore.ieee.org/document/9497756
-    display:  IEEE Robotics and Automation Letters (2021)
-  highlight: 1
-  news2:

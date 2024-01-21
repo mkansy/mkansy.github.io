@@ -1,11 +1,7 @@
-# My Simple Personal Website
-# Adapted from "Allan Lab" Website Template
+# Manuel Kansy's Personal Website
 
+This website is adapted from the [website template of Allan Lab](https://github.com/mpa139/allanlab) 
+and the [adaptation from Simon Giebenhain](https://simongiebenhain.github.io/). 
+Go to [this website](https://www.allanlab.org/aboutwebsite.html) for more information about how to set up a similar website for yourself.
 
-This website is powered by Jekyll and some Bootstrap, Bootwatch. We tried to make it simple yet adaptable, so that it is easy for you to use it as a template. Plese feel free to copy and modify for your own purposes.  You don't have to link to us or mention us (but of course we appreciate it).
-
-Go to [this website](https://www.allanlab.org/aboutwebsite.html) for more information.
-
-
-Copyright Allan Lab and Simon Giebenhain. Code released under the MIT License.
-
+Thank you very much to the respective authors for providing these resources!

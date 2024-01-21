@@ -14,6 +14,7 @@
   </div>
   <div class="col-sm-8">
   <pubtit>{{ publi.title }}</pubtit>
+  <p style="color:rgb(128,128,128);"><em>{{ publi.conference }}</em></p>
   <p>{{ publi.description }}</p>
   <p><em>{{ publi.authors }}</em></p>
   <p><strong><a href="{{ publi.link.url }}">{{ publi.link.display }}</a></strong></p>

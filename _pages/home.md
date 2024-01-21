@@ -1,21 +1,15 @@
 ---
-title: "Simon Giebenhain"
+title: "Manuel Kansy"
 layout: homelay
 sitemap: true
 permalink: /
 ---
 
-I am a final year master's student at the University of Konstanz. 
-My general areas of interest are machine learning and computer vision. 
-More specifically, I am highly interested in Geometric Deep Learning and Neural Scene Representations.  
-Currently I am working on my master's thesis under the supervision of Prof. Bastian Goldlücke, 
-where I am exploring how a geometrically inspired neural network design 
-can benefit neural implicit shape representations for 3D reconstruction.   
-In my future research I hope to take steps towards algorithms, that like humans, 
-easily perceive, understand and abstractly reason about their 3D environments from few observations.
+I am a PhD student at the [Computer Graphics Laboratory at ETH Zurich](https://cgl.ethz.ch/) in cooperation with [DisneyResearch\|Studios](https://studios.disneyresearch.com/) since May 2021.
+I am supervised by [Prof. Markus Gross](https://cgl.ethz.ch/people/grossm/) and [Dr. Romann M. Weber](https://randomwalk.blog/about-me/).
+My research interests include various areas of deep learning and especially generative modeling. 
+I always find it most fascinating and satisfying if I'm working on projects that interact with the environment in some way, i.e., where I can see/hear/feel its results.
+In recent years, I focused mostly on face-related image and video generation tasks.
 
-
-
-
-
-
+Before the PhD, I completed my master's degree in *Robotics, Cognition, Intelligence* at the Technical University of Munich. Thereby, I became really interested in deep learning and had the privilege to work on my master's thesis and several other projects in [Prof. Laura Leal-Taixé's Dynamic Vision and Learning Group](https://dvl.in.tum.de/).
+Before that, I did my bachelor's degree at the Baden-Wuerttemberg Cooperative State University (DHBW) Stuttgart in cooperation with Robert Bosch GmbH.
