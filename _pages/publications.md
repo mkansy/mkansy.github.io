@@ -30,6 +30,3 @@
 
 {% endif %}
 {% endfor %}
-
-
-<p> &nbsp; </p>
