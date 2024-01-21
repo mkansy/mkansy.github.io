@@ -1,4 +1,4 @@
-- title: "Controllable Inversion of Black-Box Face Recognition Models via Diffusion"
+- title: Controllable Inversion of Black-Box Face Recognition Models via Diffusion
   image: id3pm.gif
   conference: IEEE/CVF International Conference on Computer Vision (ICCV) Workshops, 2023
   description: We tackle the challenging task of inverting the latent space of pre-trained face recognition models without full model access (i.e. black-box setting). Our method, the identity denoising diffusion probabilistic model (ID3PM), leverages the stochastic nature of the denoising diffusion process to produce high-quality, identity-preserving face images with various backgrounds, lighting, poses, and expressions.
@@ -8,7 +8,7 @@
     display: Project Page
   highlight: 1
 
-- title: "Self-Supervised Effective Resolution Estimation with Adversarial Augmentations"
+- title: Self-Supervised Effective Resolution Estimation with Adversarial Augmentations
   conference: IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops, 2023
   image: eres.gif
   description: The terms high-resolution and high-quality are not equivalent, and high-resolution does not always imply high-quality. In this paper, we motivate and precisely define the concept of effective resolution and propose a novel self-supervised learning scheme to train a neural network for effective resolution estimation. We demonstrate that our method outperforms state-of-the-art image quality assessment methods in estimating the sharpness of real and generated human faces, despite using only unlabeled data during training.

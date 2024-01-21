@@ -1,0 +1,51 @@
+- title: Multiple Object Tracking with Spatio-Temporal Proposals
+  image: mot.gif
+  type: Master's Thesis
+  time: 2020 - 2021
+  bullets:
+    - Adapted Faster R-CNN to produce spatio-temporal object proposals (STPs)
+    - Adapted Message Passing Network (MPN) tracking framework to jointly perform detection and data association given the STPs
+    - Evaluated different design choices and data sets to improve detection performance
+  tech: Python, PyTorch, Ubuntu
+
+- title: Deep Learning for Video Analysis
+  image: dl4va.gif
+  type: "Course: Master Practical"
+  time: 2019 - 2020
+  bullets:
+    - Created dataset with drone videos of different interestingness levels
+    - Implemented novel neural network architectures to predict drone video interestingness
+    - Developed pipeline to output edited composite video given several raw videos as input
+  tech: Python, PyTorch, Ubuntu
+
+- title: Reinforcement Learning for Robotics
+  image: rlr.gif
+  type: "Course: Reinforcement Learning for Robotics"
+  time: 2019 - 2020
+  bullets:
+    - "Created simple environments: Inverted pendulum, cart-pole"
+    - "Implemented classic function approximators: Tabular, variable resolution (constant, linear combination of basis functions), Gaussian mixture model"
+    - Implemented and compared reinforcement learning and optimal control (MPC) methods
+  tech: MATLAB, Simulink, MacOS
+
+- title: Edge Region Inpainting for Video Stabilization
+  image: adl4cv.gif
+  type: "Course: Advanced Deep Learning for Computer Vision"
+  time: 2019
+  bullets:
+    - Created synthetic dataset of unstabilized videos by applying transformations to videos
+    - Reimplemented and extended image inpainting architecture to inpaint video edge regions (Python, PyTorch, Ubuntu)
+    - Compared results qualitatively and quantitatively to state of the art methods
+  tech: Python, PyTorch, Ubuntu
+
+- title: Various Projects During Bachelor
+  image: bachelor.gif
+  time: 2015 - 2018
+  bullets:
+    - "Semester 6 (Bachelor Thesis): Development and Validation of a Maneuver Strategy to Avoid Collision with Oncoming Traffic"
+    - "Semester 5+6 (Student Research Project): Development of a Concept to Optically Localize a Measuring Device"
+    - "Semester 5 (Semester Project): Development of a Testing Concept to Visualize Accidents with Oncoming Traffic and Validation of the Sensors Necessary for the Corresponding Safety Function"
+    - "Semester 4 (Semester Project, Thailand): Integrating and Evaluating the Reduced Order Model of the Magnetic Circuit of the Flow Control Valve of a High Pressure Pump in a Simulation Software"
+    - "Semester 3 (Semester Project): Enhancement of a Software to Calculate the Fuel Benefit of a Vehicle Equipped with the Coasting Function"
+    - "Semester 2 (Semester Project): Development of a VBA Tool to Automatize the Creation of Software Component Release Notes"
+  tech: Simulink, MATLAB, C++, C#, Unity, Windows, MacOS, iOS, Embedded Linux, Vehicle Deployment

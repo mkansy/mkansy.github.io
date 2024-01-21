@@ -27,3 +27,27 @@ layout: default
 	{{ my_include | markdownify }}
 </div>
 </div>
+<div class="row">
+<div class="col-sm-12">
+	{% capture my_include %}{% include_relative university_projects.md %}{% endcapture %}
+	{{ my_include | markdownify }}
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+	{% capture my_include %}{% include_relative student_supervision.md %}{% endcapture %}
+	{{ my_include | markdownify }}
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+	{% capture my_include %}{% include_relative teaching.md %}{% endcapture %}
+	{{ my_include | markdownify }}
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+	{% capture my_include %}{% include_relative other_activities.md %}{% endcapture %}
+	{{ my_include | markdownify }}
+</div>
+</div>
