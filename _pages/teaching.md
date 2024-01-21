@@ -1,5 +1,7 @@
 # Teaching
 
+<p>**Note**: The links below only work for ETH students.</p>
+
 <div class="row">
 <div class="well col-sm-18 clearfix">
 
