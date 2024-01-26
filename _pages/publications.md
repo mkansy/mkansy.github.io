@@ -17,7 +17,9 @@
   <p style="color:rgb(128,128,128);"><em>{{ publi.conference }}</em></p>
   <p>{{ publi.description }}</p>
   <p><em>{{ publi.authors }}</em></p>
-  <p><strong><a href="{{ publi.link.url }}">{{ publi.link.display }}</a></strong></p>
+  <p style="display:inline"><strong>
+    <a href="{{ publi.link.url }}">{{ publi.link.display }}</a> {% if publi.link2 %} &nbsp; --- &nbsp; <a href="{{ publi.link2.url }}">{{ publi.link2.display }}</a>{% endif %} {% if publi.link3 %} &nbsp; --- &nbsp; <a href="{{ publi.link3.url }}">{{ publi.link3.display }}</a>{% endif %} {% if publi.link4 %} &nbsp; --- &nbsp; <a href="{{ publi.link4.url }}">{{ publi.link4.display }}</a>{% endif %}
+  </strong></p>
   <p class="text-danger"><strong> {{ publi.news1 }}</strong></p>
   <p> {{ publi.news2 }}</p>
   </div>

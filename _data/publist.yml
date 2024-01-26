@@ -4,8 +4,17 @@
   description: We tackle the challenging task of inverting the latent space of pre-trained face recognition models without full model access (i.e. black-box setting). Our method, the identity denoising diffusion probabilistic model (ID3PM), leverages the stochastic nature of the denoising diffusion process to produce high-quality, identity-preserving face images with various backgrounds, lighting, poses, and expressions.
   authors: Manuel Kansy, Anton Raël (ETH Zurich), Graziana Mignone (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
-    url: https://studios.disneyresearch.com/2023/10/02/controllable-inversion-of-black-box-face-recognition-models-via-diffusion/
+    url: https://cgl.ethz.ch/publications/papers/paperKan23b.php
     display: Project Page
+  link2:
+    url: https://www.youtube.com/watch?v=2Mt6c4Gjfz4
+    display: Video
+  link3:
+    url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b.pdf
+    display: Paper
+  link4:
+    url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b_supp.pdf
+    display: Supplementary Material
   highlight: 1
 
 - title: Self-Supervised Effective Resolution Estimation with Adversarial Augmentations
@@ -16,4 +25,13 @@
   link:
     url: https://studios.disneyresearch.com/2023/01/03/self-supervised-effective-resolution-estimation-with-adversarial-augmentations/
     display: Project Page
+  link2:
+    url: https://www.youtube.com/watch?v=kGpbzkdhwsA
+    display: Video
+  link3:
+    url: https://studios.disneyresearch.com/app/uploads/2022/12/Self-Supervised-Effective-Resolution-Estimation-with-Adversarial-Augmentations.pdf
+    display: Paper
+  link4:
+    url: https://studios.disneyresearch.com/app/uploads/2022/12/Self-Supervised-Effective-Resolution-Estimation-with-Adversarial-Augmentations_supplementary.pdf
+    display: Supplementary Material
   highlight: 1
