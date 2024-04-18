@@ -2,13 +2,14 @@
   image: id3pm.gif
   conference: IEEE/CVF International Conference on Computer Vision (ICCV) Workshops, 2023
   description: We tackle the challenging task of inverting the latent space of pre-trained face recognition models without full model access (i.e. black-box setting). Our method, the identity denoising diffusion probabilistic model (ID3PM), leverages the stochastic nature of the denoising diffusion process to produce high-quality, identity-preserving face images with various backgrounds, lighting, poses, and expressions.
-  authors: Manuel Kansy, Anton Raël (ETH Zurich), Graziana Mignone (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
+  authors: Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Anton Raël (ETH Zurich), Graziana Mignone (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
     url: https://cgl.ethz.ch/publications/papers/paperKan23b.php
     display: Project Page
-  link2:
-    url: https://www.youtube.com/watch?v=2Mt6c4Gjfz4
-    display: Video
+  # YouTube video currently set to private for legal reasons.
+  # link2:
+  #   url: https://www.youtube.com/watch?v=2Mt6c4Gjfz4
+  #   display: Video
   link3:
     url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b.pdf
     display: Paper
@@ -21,7 +22,7 @@
   conference: IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops, 2023
   image: eres.gif
   description: The terms high-resolution and high-quality are not equivalent, and high-resolution does not always imply high-quality. In this paper, we motivate and precisely define the concept of effective resolution and propose a novel self-supervised learning scheme to train a neural network for effective resolution estimation. We demonstrate that our method outperforms state-of-the-art image quality assessment methods in estimating the sharpness of real and generated human faces, despite using only unlabeled data during training.
-  authors: Manuel Kansy, Julian Balletshofer (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Graziana Mignone (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
+  authors: Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Julian Balletshofer (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Graziana Mignone (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
     url: https://studios.disneyresearch.com/2023/01/03/self-supervised-effective-resolution-estimation-with-adversarial-augmentations/
     display: Project Page
