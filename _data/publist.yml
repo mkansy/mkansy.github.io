@@ -4,17 +4,20 @@
   description: We tackle the challenging task of inverting the latent space of pre-trained face recognition models without full model access (i.e. black-box setting). Our method, the identity denoising diffusion probabilistic model (ID3PM), leverages the stochastic nature of the denoising diffusion process to produce high-quality, identity-preserving face images with various backgrounds, lighting, poses, and expressions.
   authors: Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Anton Raël (ETH Zurich), Graziana Mignone (DisneyResearch|Studios), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
-    url: https://cgl.ethz.ch/publications/papers/paperKan23b.php
+    #url: https://cgl.ethz.ch/publications/papers/paperKan23b.php
+    url: https://studios.disneyresearch.com/2023/10/02/controllable-inversion-of-black-box-face-recognition-models-via-diffusion/
     display: Project Page
   # YouTube video currently set to private for legal reasons.
   # link2:
   #   url: https://www.youtube.com/watch?v=2Mt6c4Gjfz4
   #   display: Video
   link3:
-    url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b.pdf
+    #url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b.pdf
+    url: https://studios.disneyresearch.com/app/uploads/2023/09/Controllable-Inversion-of-Black-Box-Face-Recognition-Models-via-Diffusion-Paper.pdf
     display: Paper
   link4:
-    url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b_supp.pdf
+    #url: https://cgl.ethz.ch/disclaimer.php?dlurl=/Downloads/Publications/Papers/2023/Kan23b/Kan23b_supp.pdf
+    url: https://studios.disneyresearch.com/app/uploads/2023/10/supplementary_material_compressed_default.pdf
     display: Supplementary Material
   highlight: 1
 

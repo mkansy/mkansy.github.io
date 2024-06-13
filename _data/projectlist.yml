@@ -35,7 +35,7 @@
   bullets:
     - Created synthetic dataset of unstabilized videos by applying transformations to videos
     - Reimplemented and extended image inpainting architecture to inpaint video edge regions (Python, PyTorch, Ubuntu)
-    - Compared results qualitatively and quantitatively to state of the art methods
+    - Compared results qualitatively and quantitatively to state-of-the-art methods
   tech: Python, PyTorch, Ubuntu
 
 - title: Various Projects During Bachelor
