@@ -4,6 +4,9 @@
   description: We propose motion-textual inversion, a general method to transfer the semantic motion of a given reference motion video to given target images. We thereby optimize a motion representation composed of a set of text/image embedding tokens using a frozen, pre-trained image-to-video diffusion model. Our method generalizes across various domains and supports multiple types of motions, including full-body, face, camera, and even hand-crafted motions.
   authors: Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
+    url: ./reenact-anything
+    display: Project Page
+  link2:
     url: https://arxiv.org/abs/2408.00458
     display: Paper
   highlight: 1

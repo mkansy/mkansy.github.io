@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Motion-textual inversion transfers the semantic motion of a given reference motion video to a variety of given target images.">
+  <meta name="keywords" content="Motion-textual inversion, Reenact anything, Video diffusion models, Stable Video Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion</title>
+  <link href="https://fonts.googleapis.com/css?family=Avenir|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="../">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="../">Manuel Kansy</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://studios.disneyresearch.com/people/jacek-naruniec/">Jacek Naruniec</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://schroers-c.github.io/web/">Christopher Schroers</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://cgl.ethz.ch/people/grossm/">Markus Gross</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://studios.disneyresearch.com/people/romann-weber/">Romann M. Weber</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ETH Zürich,</span>
+            <span class="author-block"><sup>2</sup>DisneyResearch|Studios, Switzerland</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2408.00458"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2408.00458"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%" preload="none" data-src="./static/videos/teaser.mp4">
+        <!-- No source element to avoid initial loading -->
+      </video>
+      <h2 class="subtitle has-text-centered">
+        We propose <em>motion-textual inversion</em>, a general method to transfer the semantic motion
+        of a given reference motion video to given target images. It generalizes across various
+        domains and supports multiple types of motions, including full-body, face, camera,
+        and even hand-crafted motions.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Fullbody section -->
+      <h2 class="title is-4" style="margin-top: 1rem; margin-bottom: 0px;">Fullbody</h2>
+      <div id="results_fullbody_carousel" class="carousel results-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+      <!-- Face section -->
+      <h2 class="title is-4" style="margin-top: 1rem; margin-bottom: 0px;">Face</h2>
+      <div id="results_face_carousel" class="carousel results-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+      <!-- Camera section -->
+      <h2 class="title is-4" style="margin-top: 1rem; margin-bottom: 0px;">Camera</h2>
+      <div id="results_camera_carousel" class="carousel results-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+      <!-- Handcrafted section -->
+      <h2 class="title is-4" style="margin-top: 1rem; margin-bottom: 0px;">Handcrafted</h2>
+      <div id="results_handcrafted_carousel" class="carousel results-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <script>
+      // Populate carousels
+      const results_categories = ["fullbody", "face", "camera", "handcrafted"]
+      results_categories.forEach((category) => {
+        const results_items = [
+          { videoID: `results_${category}_01`, hasSecondOutput: false },
+          { videoID: `results_${category}_02`, hasSecondOutput: false },
+          { videoID: `results_${category}_03`, hasSecondOutput: false },
+          { videoID: `results_${category}_04`, hasSecondOutput: true },
+          { videoID: `results_${category}_05`, hasSecondOutput: true }
+        ];
+
+        document.getElementById(`results_${category}_carousel`).innerHTML = results_items.map(item =>
+          createResultsCarouselItem(item.videoID, item.hasSecondOutput)
+        ).join('');
+      });
+
+      // Synchronize videos
+      document.querySelectorAll('.item_results').forEach(item => {
+        const itemId = item.classList[1];
+        synchronizeVideos(`.${itemId} .carousel-video`);
+      });
+    </script>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent years have seen a tremendous improvement in the quality of video generation and
+            editing approaches. While several techniques focus on editing appearance, few address
+            motion. Current approaches using text, trajectories, or bounding boxes are limited to
+            simple motions, so we specify motions with a single motion reference video instead.
+            We further propose to use a pre-trained <u>image</u>-to-video model rather than a
+            <u>text</u>-to-video model. This approach allows us to preserve the exact appearance
+            and position of a target object or scene and helps disentangle appearance from motion.
+          </p>
+          <p>
+            Our method, called <i>motion-textual inversion</i>, leverages our observation that
+            image-to-video models extract appearance mainly from the (latent) image input, while
+            the text/image embedding injected via cross-attention predominantly controls motion.
+            We thus represent motion using text/image embedding tokens. By operating on an inflated
+            motion-text embedding containing multiple text/image embedding tokens per frame, we
+            achieve a high temporal motion granularity. Once optimized on the motion reference
+            video, this embedding can be applied to various target images to generate videos with
+            semantically similar motions.
+          </p>
+          <p>
+            Our approach does not require spatial alignment between the motion reference video and
+            target image, generalizes across various domains, and can be applied to various tasks
+            such as full-body and face reenactment, as well as controlling the motion of inanimate
+            objects and the camera. We empirically demonstrate the effectiveness of our method in
+            the semantic video motion transfer task, significantly outperforming existing methods
+            in this context.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+
+      <!-- Observation 1. -->
+      <div class="column">
+        <div class="content obs1">
+          <h2 class="title is-3">Observation 1</h2>
+          <p>
+            In image-to-video models, the <b>image input</b> primarily dictates the
+            <b>appearance</b> of the generated videos.
+          </p>
+          <table class="no-borders">
+            <colgroup>
+              <col style="width: 33%;">
+              <col style="width: 33%;">
+              <col style="width: 33%;">
+            </colgroup>
+            <tr>
+              <td>
+                <img src="./static/images/white_horse_1280_704.png" id="obs1_input" class="block-image bottom-padding" />
+              </td>
+              <td>
+                <video poster="" id="obs1_white" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/horse_white_lat_white_text.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="obs1_pink" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/horse_white_lat_pink_text.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td class="has-text-centered small-text">Input image</td>
+              <td class="has-text-centered small-text">"A <u>white</u> horse walking"</td>
+              <td class="has-text-centered small-text">"A <u>pink</u> horse walking"</td>
+            </tr>
+          </table>
+          <p>
+            For example, <a href="https://i2vgen-xl.github.io/">I2VGen-XL</a> generates a video
+            of a predominantly white horse from a white horse image, even when the input text
+            specifies the horse’s color as "pink."
+          </p>
+        </div>
+      </div>
+      <script>
+        // Synchronize videos
+        synchronizeVideos(`.obs1 .block-video`);
+      </script>
+      <!--/ Observation 1. -->
+
+      <!-- Observation 2. -->
+      <div class="column">
+        <h2 class="title is-3">Observation 2</h2>
+        <div class="columns is-centered">
+          <div class="column content obs2">
+            <p>
+              In image-to-video models, <b>text/image embeddings</b> significantly influence the
+              generated <b>motions</b>.
+            </p>
+            <table class="no-borders">
+              <colgroup>
+                <col style="width: auto;">
+                <col style="width: auto;">
+                <col style="width: 29%;">
+                <col style="width: 29%;">
+                <col style="width: 29%;">
+              </colgroup>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th colspan="2" style="vertical-align:middle; text-align:center; border:none;" class="small-text">CLIP embedding</th>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="small-text" style="border-right: 1px solid black;">Real horse</td>
+                <td class="small-text">Toy horse</td>
+              </tr>
+              <tr>
+                <th rowspan="2" style="vertical-align:middle; text-align:center;" class="small-text">Image latent</th>
+                <td class="small-text" style="border-bottom: 1px solid black;">Real horse</td>
+                <td style="border-right: 1px dashed black; border-bottom: 1px solid black;">
+                  <img src="./static/images/white_horse.png" id="obs2_input_white" class="block-image"/>
+                </td>
+                <td style="border-right: 1px solid black; border-bottom: 1px solid black;">
+                  <video poster="" id="obs2_white_lat_white_emb" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/horse_white_lat_white_emb.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td style="border-bottom: 1px solid black;">
+                  <video poster="" id="obs2_white_lat_pink_emb" class="block-video" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/horse_white_lat_pink_emb.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td class="small-text">Toy horse</td>
+                <td style="border-right: 1px dashed black;">
+                  <img src="./static/images/pink_horse.png" id="obs2_input_pink" class="block-image" />
+                </td>
+                <td style="border-right: 1px solid black;">
+                  <video poster="" id="obs2_pink_lat_white_emb" class="block-video" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/horse_pink_lat_white_emb.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="obs2_pink_lat_pink_emb" class="block-video" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/horse_pink_lat_pink_emb.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+            </table>
+            <script>
+              // Synchronize videos
+              synchronizeVideos(`.obs2 .block-video`);
+            </script>
+            <p>
+              Swapping the CLIP image embeddings of a real horse and a toy horse in
+              <a href="https://stability.ai/stable-video">Stable Video Diffusion</a> results in a
+              swap of the motions in the output videos. This suggests that the real horse’s embedding
+              encodes a walking motion, while the toy horse’s embedding encodes camera motion without
+              object movement.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Observation 2. -->
+    </div>
+
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            The baseline image-to-video diffusion model,
+            <a href="https://stability.ai/stable-video">Stable Video Diffusion</a> in our case,
+            inputs the first frame in two places: as image (latent) concatenated with the noisy
+            video and as image embedding.
+            <!--(some other image-to-video diffusion models may input text embeddings here instead)-->
+            We propose to replace the
+            <span style="color: #D7918D">image embedding \(\mathbf{e}\)</span> with a learned
+            <span style="color: #157611">motion-text embedding \(\mathbf{m}^*\)</span>. The
+            motion-text embedding is optimized
+            directly with a regular diffusion model loss on one given motion reference video
+            \(\mathbf{x}_0\) while keeping the diffusion model frozen.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img src="./static/images/architecture.png" id="architecture"/>
+          <p class="small-text">
+            Note that the diffusion
+            process operates in latent space in practice, and other conditionings and model
+            parameterizations are omitted for clarity.
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            For best results, the motion-text embedding is inflated prior to optimization to
+            \((F+1) \times N\) tokens, where \(F\) is the number of frames and \(N\) is a
+            hyperparameter, while keeping the embedding dimension \(d\) the same to stay
+            compatible with the pre-trained diffusion model. For more details regarding the
+            motion-text and cross-attention inflation, please refer to sections 3.4 and B.4
+            of the paper.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+
+    <!-- Evaluation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Evaluation</h2>
+        <div class="content has-text-justified">
+          <p>
+            We compare our method to SVD = <a href="https://stability.ai/stable-video">Stable Video Diffusion</a>
+            (baseline, no motion input), VC = <a href="https://videocomposer.github.io/">VideoComposer</a>,
+            and MD = <a href="https://showlab.github.io/MotionDirector/">MotionDirector</a>
+            for three different motions and target images: full-body reenactment, face
+            reenactment, and camera motion.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="hero is-light is-small" style="background: #ffffff; padding-bottom: 1rem;">
+      <div id="eval_carousel" class="carousel eval-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <script>
+      // Populate carousels
+      const eval_items = [
+        { videoID: `eval_fullbody_01`},
+        { videoID: `eval_face_01`},
+        { videoID: `eval_camera_01`}
+      ];
+
+      document.getElementById(`eval_carousel`).innerHTML = eval_items.map(item =>
+        createEvalCarouselItem(item.videoID)
+      ).join('');
+
+      // Synchronize videos
+      document.querySelectorAll('.item_eval').forEach(item => {
+        const itemId = item.classList[1];
+        synchronizeVideos(`.${itemId} .block-video`);
+      });
+    </script>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <p>
+            Our method uniquely preserves the input image’s appearance and layout while
+            successfully transferring the semantic motion of the video.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Evaluation. -->
+
+    <!-- Additional Results. -->
+    <h2 class="title is-3">Additional Results</h2>
+
+    <!-- Motion Style Transfer. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content motion_style_transfer">
+          <h2 class="title is-4">Motion Style Transfer</h2>
+          <p>
+            Our learned motion-text embeddings do not only store the rough motion category
+            but also the style of the motion.
+          </p>
+          <table class="no-borders">
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+            </colgroup>
+            <tr>
+              <td>
+                <video poster="" id="motion_style_transfer_01_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_01_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_01_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_01_output.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_01_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_01_output2.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_01_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_01_output3.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_01_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_01_output4.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <video poster="" id="motion_style_transfer_02_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_02_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_02_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_02_output.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_02_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_02_output2.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_02_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_02_output3.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="motion_style_transfer_02_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/motion_style_transfer_02_output4.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td class="has-text-centered small-text">Motion reference videos</td>
+              <td colspan="4" class="has-text-centered small-text">Generated videos</td>
+            </tr>
+          </table>
+          <p>
+            Here, we apply two different gaits to the same target image: a horse trot (smooth)
+            and a canter (rocking). The resulting videos for the cartoon dog are not only
+            showing the dog moving, but their motions also closely match the motion reference
+            video's gait style. Furthermore, the extreme cross-domain examples with the boat,
+            car, and cereal box show that the essence of the motion style is preserved even
+            across completely different objects.
+          </p>
+        </div>
+        <script>
+          // Synchronize videos
+          synchronizeVideos(`.motion_style_transfer .block-video`);
+        </script>
+      </div>
+    </div>
+    <!--/ Motion Style Transfer. -->
+
+    <!-- Semantic Motion Transfer. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Semantic Motion Transfer</h2>
+        <div class="columns is-centered">
+          <div class="column content semantic_motion_transfer">
+            <p>
+              Our learned motion-text embeddings store the semantic motion (animal moving in
+              the direction it is facing and moving its head down) rather than the spatial
+              motion (animal moving from right to left and left part is going down).
+            </p>
+            <table class="no-borders">
+              <tr>
+                <td>
+                  <video poster="" id="semantic_motion_transfer_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_input.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="semantic_motion_transfer_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="semantic_motion_transfer_output_flipped" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output_flipped.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td class="has-text-centered small-text">Motion reference video</td>
+                <td class="has-text-centered small-text">Generated video for <u>regular</u> horse image input</td>
+                <td class="has-text-centered small-text">Generated video for <u>flipped</u> horse image input</td>
+              </tr>
+            </table>
+            <script>
+              // Synchronize videos
+              synchronizeVideos(`.semantic_motion_transfer .block-video`);
+            </script>
+            <p>
+              This can be seen in the above example where we apply the same learned
+              motion-text embedding to a flipped input image, and our method produces
+              semantically similar results.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Semantic Motion Transfer. -->
+    </div>
+    <!--/ Additional Results. -->
+
+    <!--/ Analysis. -->
+    <h2 class="title is-3">Analysis</h2>
+
+    <!--/ Motion Visualization. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Motion Visualization</h2>
+        <div class="columns is-centered">
+          <div class="column content motion_visualization">
+            <p>
+              We generate videos using our optimized motion-text embedding for a
+              "jumping jacks" motion (same reference as from ablation below) both with the image input
+              (conditional) and without (unconditional) after a different number of
+              optimization iterations.
+            </p>
+            <table class="no-borders">
+              <colgroup>
+                <col style="width: auto;">
+                <col style="width: 17%;">
+                <col style="width: 17%;">
+                <col style="width: 17%;">
+                <col style="width: 17%;">
+                <col style="width: 17%;">
+              </colgroup>
+              <tr>
+                <th>Iteration</th>
+                <th>0</th>
+                <th>200</th>
+                <th>500</th>
+                <th>1000</th>
+                <th>2000</th>
+              </tr>
+              <tr>
+                <td class="small-text">Conditional</td>
+                <td>
+                  <video poster="" id="motion_visualization_cond_0000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_cond_0000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_cond_0200" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_cond_0200.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_cond_0500" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_cond_0500.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_cond_1000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_cond_1000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_cond_2000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_cond_2000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td class="small-text">Unconditional<br/>(motion visualization)<br/>seed 0</td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_0_0000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_0_0000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_0_0200" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_0_0200.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_0_0500" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_0_0500.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_0_1000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_0_1000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_0_2000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_0_2000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td class="small-text">Unconditional<br/>(motion visualization)<br/>seed 1</td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_1_0000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_1_0000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_1_0200" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_1_0200.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_1_0500" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_1_0500.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_1_1000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_1_1000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="motion_visualization_uncond_1_2000" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/motion_vis_uncond_1_2000.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+            </table>
+            <script>
+              // Synchronize videos
+              synchronizeVideos(`.motion_visualization .block-video`);
+            </script>
+            <p>
+              Note how the appearance of the unconditional generations differs from
+              the motion reference video and varies with different seeds. Further
+              observe that our method effectively generates similar semantic motions
+              without needing or enforcing spatial alignment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Motion Visualization. -->
+
+    <!--/ Ablation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Ablation</h2>
+        <div class="columns is-centered">
+          <div class="column content ablation">
+            <p>
+              Our proposed motion-text embedding inflation is crucial for successful
+              motion transfer.
+            </p>
+            <table class="no-borders">
+              <colgroup>
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+              </colgroup>
+              <tr>
+                <th>Reference</th>
+                <th>\(F'=1, N=1\)</th>
+                <th>\(F'=1, N=15\)</th>
+                <th>\(F'=15, N=1\)</th>
+                <th>\(F'=15, N=5\) (Default)</th>
+                <th>\(F'=15, N=15\)</th>
+              </tr>
+              <tr>
+                <td>
+                  <video poster="" id="ablation_input" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_input.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="ablation_1_1" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_1_1.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="ablation_1_15" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_1_15.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="ablation_15_1" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_1.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="ablation_15_5" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_5.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="ablation_15_15" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_15.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">
+                  <img src="./static/images/arrow.png" id="arrow" class="block-image"/>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">Significant improvement</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+            <script>
+              // Synchronize videos
+              synchronizeVideos(`.ablation .block-video`);
+            </script>
+            <p>
+              While adding more tokens (increasing \(N\)) improves the results already,
+              the biggest gain comes from having different tokens for each frame
+              (where \(F' = F+1 = 15\)).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Ablation. -->
+
+    <!--/ Failure Cases. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Failure cases</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our method is limited by the priors and quality of the pre-trained
+            image-to-video model, which may lead to artifacts (e.g., identity changes
+            as head moves in first example). Furthermore, there may be some structure
+            leakage in some cases, leading to certain characteristics from the motion
+            reference video being visible (e.g., human-like legs on a kangaroo in second
+            example). Lastly, our method struggles to transfer spatially fine-grained
+            motion at times (e.g., typing motion not transferred to dinosaurs in third
+            example).
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="hero is-light is-small" style="background: #ffffff; padding-bottom: 1rem;">
+      <div id="failure_carousel" class="carousel results-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <script>
+      // Populate carousels
+      const failure_items = [
+        { videoID: `failure_01`, hasSecondOutput: false },
+        { videoID: `failure_02`, hasSecondOutput: false },
+        { videoID: `failure_03`, hasSecondOutput: false },
+      ];
+
+      document.getElementById(`failure_carousel`).innerHTML = failure_items.map(item =>
+        createResultsCarouselItem(item.videoID, item.hasSecondOutput, "item_failure")
+      ).join('');
+
+      // Synchronize videos
+      document.querySelectorAll('.item_failure').forEach(item => {
+        const itemId = item.classList[1];
+        synchronizeVideos(`.${itemId} .carousel-video`);
+      });
+    </script>
+    <!--/ Failure Cases. -->
+    <!--/ Analysis. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{kansy2024reenact,
+  title={Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion},
+  author={Kansy, Manuel and Naruniec, Jacek and Schroers, Christopher and Gross, Markus and Weber, Romann M},
+  journal={arXiv preprint arXiv:2408.00458},
+  year={2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- Script to add videos when they are in the viewport and remove them when they are not -->
+<script>
+  function initializeVideos() {
+    const videos = document.querySelectorAll('video');
+
+    const loadVideo = (video) => {
+      // Check if the video has already been loaded
+      if (video.loaded) return; // Prevent loading if already loaded
+      video.loaded = true; // Mark this video as loaded
+
+      const source = document.createElement('source');
+      source.src = video.getAttribute('data-src');
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.load(); // Load the video after adding the source
+    };
+
+    const unloadVideo = (video) => {
+      // Check if the video is loaded
+      if (!video.loaded) return; // Prevent unloading if not loaded
+      video.loaded = false; // Mark this video as unloaded
+
+      // Remove the source element to free up resources
+      const sources = video.getElementsByTagName('source');
+      while (sources.length > 0) {
+        video.removeChild(sources[0]);
+      }
+      video.pause(); // Pause the video if it’s currently playing
+      video.currentTime = 0; // Reset the video to the beginning
+    };
+
+    const handleVideo = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadVideo(entry.target);
+          // observer.unobserve(entry.target); // Stop observing once loaded
+        } else {
+          unloadVideo(entry.target); // Unload video when it goes out of view
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleVideo, { threshold: 0.1 });
+
+    videos.forEach(video => {
+      video.loaded = false; // Initialize loaded flag
+      observer.observe(video);
+    });
+  }
+
+  // Init videos initially
+  document.addEventListener('DOMContentLoaded', function () {
+    initializeVideos();
+  });
+
+  // Init videos after returning back to tab after some time
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      initializeVideos();
+    }
+  });
+</script>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website was adapted from the <a href="https://github.com/nerfies/nerfies.github.io">source code</a>
+            of the <a href="https://nerfies.github.io/">Nerfies website</a>. Thank you to the original authors!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
