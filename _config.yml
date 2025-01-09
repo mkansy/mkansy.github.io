@@ -8,9 +8,9 @@
 # Site settings
 title: Manuel Kansy
 tagline: Academic Website of Manuel Kansy
-email: manuel.kansy@inf.ethz.ch
+email: manuel.kansy@disneyresearch.com
 description: > # this means to ignore newlines until "baseurl:"
-  I am a PhD student at ETH Zurich in cooperation with DisneyResearch|Studios  
+  I am an associate research scientist at DisneyResearch|Studios  
   focusing on image and video generation, especially for human faces.
 domain: mkansy.github.io
 url: https://mkansy.github.io

@@ -5,8 +5,9 @@ sitemap: true
 permalink: /
 ---
 
-I am a PhD student at the [Computer Graphics Laboratory at ETH Zurich](https://cgl.ethz.ch/) in cooperation with [DisneyResearch\|Studios](https://studios.disneyresearch.com/) since May 2021.
-I am supervised by [Prof. Markus Gross](https://cgl.ethz.ch/people/grossm/) and [Dr. Romann M. Weber](https://randomwalk.blog/about-me/).
+I am an associate research scientist at [DisneyResearch\|Studios](https://studios.disneyresearch.com/). Specifically, I am part of the Facial VFX research team led by [Dr. Derek Bradley](https://people.inf.ethz.ch/~bradleyd/).
+
+Previously, from 2021 to 2024, I was a PhD student at the [Computer Graphics Laboratory at ETH Zurich](https://cgl.ethz.ch/) in cooperation with [DisneyResearch\|Studios](https://studios.disneyresearch.com/), where I was supervised by [Prof. Markus Gross](https://cgl.ethz.ch/people/grossm/) and [Dr. Romann M. Weber](https://randomwalk.blog/about-me/).
 My research interests include various areas of deep learning and especially generative modeling. 
 I always find it most fascinating and satisfying if I'm working on projects that interact with the environment in some way, i.e., where I can see/hear/feel its results.
 In recent years, I focused mostly on face-related image and video generation tasks.

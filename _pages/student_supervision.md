@@ -1,6 +1,6 @@
 # Student Supervision
 
-<p>If you are an ETH student and are interested in doing your thesis in our group, feel free to reach out to me via <a href="mailto:manuel.kansy@inf.ethz.ch">email</a>.</p>
+<p>If you are an ETH student and are interested in doing your thesis in our group, feel free to reach out to me via <a href="mailto:manuel.kansy@disneyresearch.com">email</a>.</p>
 
 <div class="row">
 <div class="well col-sm-18 clearfix">
