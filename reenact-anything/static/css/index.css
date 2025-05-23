@@ -50,7 +50,6 @@ body {
 
 .publication-venue {
     color: #555;
-    width: fit-content;
     font-weight: bold;
 }
 
@@ -171,14 +170,42 @@ table.no-borders td {
 }
 
 .eval-carousel .item_eval {
-  margin: 5px;
+  margin: 10px;
   overflow: hidden;
-  border: 1px solid #bbb;
-  border-radius: 10px;
   padding: 0px;
   font-size: 20px;
 }
 
 .eval-carousel video {
+  margin: 0;
+}
+
+.ablation-carousel {
+  overflow: hidden;
+}
+
+.ablation-carousel .item_ablation {
+  margin: 10px;
+  overflow: hidden;
+  padding: 0px;
+  font-size: 20px;
+}
+
+.ablation-carousel video {
+  margin: 0;
+}
+
+.svdcomp-carousel {
+  overflow: hidden;
+}
+
+.svdcomp-carousel .item_svdcomp {
+  margin: 10px;
+  overflow: hidden;
+  padding: 0px;
+  font-size: 20px;
+}
+
+.svdcomp-carousel video {
   margin: 0;
 }

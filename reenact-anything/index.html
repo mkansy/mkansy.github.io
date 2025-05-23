@@ -26,6 +26,12 @@
 <body>
 
 
+<div class="notification is-warning is-light is-size-6 has-text-centered" style="margin: 0.5rem 1rem; padding: 0.5rem 0.75rem;">
+  <button class="delete"></button>
+  <b>Note</b>: The site may freeze occasionally — please refresh/reopen if needed.
+</div>
+
+
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -52,6 +58,9 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion</h1>
+
+          <div class="is-size-3 publication-venue">ACM SIGGRAPH 2025 (Conference Track)</div>
+
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="../">Manuel Kansy</a><sup>1,2</sup>,</span>
@@ -216,6 +225,7 @@
 
 <section class="section">
   <div class="container is-max-desktop">
+    <!-- Observations. -->
     <div class="columns is-centered">
 
       <!-- Observation 1. -->
@@ -346,6 +356,7 @@
       </div>
       <!--/ Observation 2. -->
     </div>
+    <!--/ Observations. -->
 
     <!-- Method. -->
     <div class="columns is-centered">
@@ -356,8 +367,7 @@
             The baseline image-to-video diffusion model,
             <a href="https://stability.ai/stable-video">Stable Video Diffusion</a> in our case,
             inputs the first frame in two places: as image (latent) concatenated with the noisy
-            video and as image embedding.
-            <!--(some other image-to-video diffusion models may input text embeddings here instead)-->
+            video and as image embedding (some other image-to-video diffusion models may input text embeddings here instead).
             We propose to replace the
             <span style="color: #D7918D">image embedding \(\mathbf{e}\)</span> with a learned
             <span style="color: #157611">motion-text embedding \(\mathbf{m}^*\)</span>. The
@@ -379,9 +389,11 @@
             For best results, the motion-text embedding is inflated prior to optimization to
             \((F+1) \times N\) tokens, where \(F\) is the number of frames and \(N\) is a
             hyperparameter, while keeping the embedding dimension \(d\) the same to stay
-            compatible with the pre-trained diffusion model. For more details regarding the
-            motion-text and cross-attention inflation, please refer to sections 3.4 and B.4
-            of the paper.
+            compatible with the pre-trained diffusion model.
+            <!-- Note: Added compared to paper caption. -->
+            For more details regarding the
+            motion-text embedding and cross-attention inflation, please refer to the paper and
+            supplementary material.
           </p>
         </div>
       </div>
@@ -391,14 +403,15 @@
     <!-- Evaluation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Evaluation</h2>
+        <h2 class="title is-3">Qualitative Evaluation</h2>
         <div class="content has-text-justified">
           <p>
+            <!-- Note: Slightly different than paper caption because it combines figures from paper and supplementary material. -->
             We compare our method to SVD = <a href="https://stability.ai/stable-video">Stable Video Diffusion</a>
             (baseline, no motion input), VC = <a href="https://videocomposer.github.io/">VideoComposer</a>,
+            MC = <a href="https://bujiazi.github.io/motionclone.github.io/">MotionClone</a>,
             and MD = <a href="https://showlab.github.io/MotionDirector/">MotionDirector</a>
-            for three different motions and target images: full-body reenactment, face
-            reenactment, and camera motion.
+            for various different motions and target images.
           </p>
         </div>
       </div>
@@ -411,9 +424,17 @@
     <script>
       // Populate carousels
       const eval_items = [
-        { videoID: `eval_fullbody_01`},
-        { videoID: `eval_face_01`},
-        { videoID: `eval_camera_01`}
+        { videoID: `eval_main_01`},
+        { videoID: `eval_main_02`},
+        { videoID: `eval_main_03`},
+        { videoID: `eval_supp_01`},
+        { videoID: `eval_supp_02`},
+        { videoID: `eval_supp_03`},
+        { videoID: `eval_supp_04`},
+        { videoID: `eval_supp_05`},
+        { videoID: `eval_supp_06`},
+        { videoID: `eval_supp_07`},
+        { videoID: `eval_supp_08`}
       ];
 
       document.getElementById(`eval_carousel`).innerHTML = eval_items.map(item =>
@@ -430,8 +451,11 @@
       <div class="column is-full-width">
         <div class="content has-text-justified">
           <p>
-            Our method uniquely preserves the input image’s appearance and layout while
-            successfully transferring the semantic motion of the video.
+            <!-- Note: A bit different than caption. -->
+            Our method is the only one that preserves the input image’s appearance and
+            layout while successfully transferring the semantic motion of the video.
+            For the quantitative
+            evaluation, please refer to the paper and supplementary material.
           </p>
         </div>
       </div>
@@ -537,52 +561,196 @@
     <!-- Semantic Motion Transfer. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-4">Semantic Motion Transfer</h2>
-        <div class="columns is-centered">
-          <div class="column content semantic_motion_transfer">
-            <p>
-              Our learned motion-text embeddings store the semantic motion (animal moving in
-              the direction it is facing and moving its head down) rather than the spatial
-              motion (animal moving from right to left and left part is going down).
-            </p>
-            <table class="no-borders">
-              <tr>
-                <td>
-                  <video poster="" id="semantic_motion_transfer_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_input.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="semantic_motion_transfer_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="semantic_motion_transfer_output_flipped" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output_flipped.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-              </tr>
-              <tr>
-                <td class="has-text-centered small-text">Motion reference video</td>
-                <td class="has-text-centered small-text">Generated video for <u>regular</u> horse image input</td>
-                <td class="has-text-centered small-text">Generated video for <u>flipped</u> horse image input</td>
-              </tr>
-            </table>
-            <script>
-              // Synchronize videos
-              synchronizeVideos(`.semantic_motion_transfer .block-video`);
-            </script>
-            <p>
-              This can be seen in the above example where we apply the same learned
-              motion-text embedding to a flipped input image, and our method produces
-              semantically similar results.
-            </p>
-          </div>
+        <div class="content semantic_motion_transfer">
+          <h2 class="title is-4">Semantic Motion Transfer</h2>
+          <p>
+            Our learned motion-text embeddings store the semantic motion (animal moving in
+            the direction it is facing and moving its head down) rather than the spatial
+            motion (animal moving from right to left and left part is going down).
+          </p>
+          <table class="no-borders">
+            <colgroup>
+              <col style="width: 33%;">
+              <col style="width: 33%;">
+              <col style="width: 33%;">
+            </colgroup>
+            <tr>
+              <td>
+                <video poster="" id="semantic_motion_transfer_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="semantic_motion_transfer_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="semantic_motion_transfer_output_flipped" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/semantic_motion_transfer_output_flipped.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td class="has-text-centered small-text">Motion reference video</td>
+              <td class="has-text-centered small-text">Generated video for <u>regular</u> horse image input</td>
+              <td class="has-text-centered small-text">Generated video for <u>flipped</u> horse image input</td>
+            </tr>
+          </table>
+          <p>
+            This can be seen in the above example where we apply the same learned
+            motion-text embedding to a flipped input image, and our method produces
+            semantically similar results.
+          </p>
         </div>
+        <script>
+          // Synchronize videos
+          synchronizeVideos(`.semantic_motion_transfer .block-video`);
+        </script>
       </div>
-      <!--/ Semantic Motion Transfer. -->
     </div>
+    <!--/ Semantic Motion Transfer. -->
+
+    <!-- Camera Motion Grid. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content camera_motion_grid">
+          <h2 class="title is-4">Camera Motion Grid</h2>
+          <p>
+            Our learned motion-text embeddings handle camera motions robustly, enabling
+            us to apply a given motion to various target images and various motions to
+            a given target image.
+          </p>
+          <table class="no-borders">
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+              <col style="width: 20%;">
+            </colgroup>
+            <tr>
+              <td>
+                <video poster="" id="camera_motion_grid_01_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_01_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_01_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_01_output.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_01_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_01_output2.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_01_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_01_output3.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_01_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_01_output4.mp4" style="padding-bottom: 5px;">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <video poster="" id="camera_motion_grid_02_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_02_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_02_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_02_output.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_02_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_02_output2.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_02_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_02_output3.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_02_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_02_output4.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <video poster="" id="camera_motion_grid_03_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_03_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_03_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_03_output.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_03_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_03_output2.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_03_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_03_output3.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_03_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_03_output4.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <video poster="" id="camera_motion_grid_04_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_04_input.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_04_output" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_04_output.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_04_output2" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_04_output2.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_04_output3" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_04_output3.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+              <td>
+                <video poster="" id="camera_motion_grid_04_output4" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/camera_motion_grid_04_output4.mp4">
+                  <!-- No source element to avoid initial loading -->
+                </video>
+              </td>
+            </tr>
+            <tr>
+              <td class="has-text-centered small-text">Motion reference videos</td>
+              <td colspan="4" class="has-text-centered small-text">Generated videos</td>
+            </tr>
+          </table>
+        </div>
+        <script>
+          // Synchronize videos
+          synchronizeVideos(`.camera_motion_grid .block-video`);
+        </script>
+      </div>
+    </div>
+    <!--/ Camera Motion Grid. -->
+
     <!--/ Additional Results. -->
 
     <!--/ Analysis. -->
@@ -595,6 +763,7 @@
         <div class="columns is-centered">
           <div class="column content motion_visualization">
             <p>
+              <!-- Note: Slightly different reference than in supplementary material. -->
               We generate videos using our optimized motion-text embedding for a
               "jumping jacks" motion (same reference as from ablation below) both with the image input
               (conditional) and without (unconditional) after a different number of
@@ -728,76 +897,37 @@
               Our proposed motion-text embedding inflation is crucial for successful
               motion transfer.
             </p>
-            <table class="no-borders">
-              <colgroup>
-                <col style="width: 16%;">
-                <col style="width: 16%;">
-                <col style="width: 16%;">
-                <col style="width: 16%;">
-                <col style="width: 16%;">
-                <col style="width: 16%;">
-              </colgroup>
-              <tr>
-                <th>Reference</th>
-                <th>\(F'=1, N=1\)</th>
-                <th>\(F'=1, N=15\)</th>
-                <th>\(F'=15, N=1\)</th>
-                <th>\(F'=15, N=5\) (Default)</th>
-                <th>\(F'=15, N=15\)</th>
-              </tr>
-              <tr>
-                <td>
-                  <video poster="" id="ablation_input" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_input.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="ablation_1_1" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_1_1.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="ablation_1_15" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_1_15.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="ablation_15_1" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_1.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="ablation_15_5" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_5.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-                <td>
-                  <video poster="" id="ablation_15_15" class="block-video" autoplay controls muted loop playsinline height="100%"  preload="none" data-src="./static/videos/ablation_15_15.mp4">
-                    <!-- No source element to avoid initial loading -->
-                  </video>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td colspan="2">
-                  <img src="./static/images/arrow.png" id="arrow" class="block-image"/>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td colspan="2">Significant improvement</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </table>
-            <script>
-              // Synchronize videos
-              synchronizeVideos(`.ablation .block-video`);
-            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero is-light is-small" style="background: #ffffff; padding-bottom: 1rem;">
+      <div id="ablation_carousel" class="carousel ablation-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <script>
+      // Populate carousels
+      const ablation_items = [
+        { videoID: `ablation_01`},
+        { videoID: `ablation_02`},
+        { videoID: `ablation_03`}
+      ];
+
+      document.getElementById(`ablation_carousel`).innerHTML = ablation_items.map(item =>
+        createAblationCarouselItem(item.videoID)
+      ).join('');
+
+      // Synchronize videos
+      document.querySelectorAll('.item_ablation').forEach(item => {
+        const itemId = item.classList[1];
+        synchronizeVideos(`.${itemId} .block-video`);
+      });
+    </script>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column content ablation">
             <p>
               While adding more tokens (increasing \(N\)) improves the results already,
               the biggest gain comes from having different tokens for each frame
@@ -808,6 +938,58 @@
       </div>
     </div>
     <!--/ Ablation. -->
+
+    <!--/ SVD Comparison. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Comparison to Stable Video Diffusion Baseline</h2>
+        <div class="columns is-centered">
+          <div class="column content svdcomp">
+            <p>
+              We compare our method to <a href="https://stability.ai/stable-video">Stable Video Diffusion</a>
+              (SVD) for multiple motions and seeds.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero is-light is-small" style="background: #ffffff; padding-bottom: 1rem;">
+      <div id="svdcomp_carousel" class="carousel svdcomp-carousel">
+        <!-- Carousel items will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <script>
+      // Populate carousels
+      const svdcomp_items = [
+        { videoID: `svdcomp_01`},
+        { videoID: `svdcomp_02`},
+        { videoID: `svdcomp_03`}
+      ];
+
+      document.getElementById(`svdcomp_carousel`).innerHTML = svdcomp_items.map(item =>
+        createSVDCompCarouselItem(item.videoID)
+      ).join('');
+
+      // Synchronize videos
+      document.querySelectorAll('.item_svdcomp').forEach(item => {
+        const itemId = item.classList[1];
+        synchronizeVideos(`.${itemId} .block-video`);
+      });
+    </script>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column content svdcomp">
+            <p>
+              While SVD often fails to align with the motion reference and is highly
+              influenced by the seed, our motion-text embedding guides the model to
+              generate videos with matching motion, minimizing variations caused by the seed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ SVD Comparison. -->
 
     <!--/ Failure Cases. -->
     <div class="columns is-centered">
@@ -850,6 +1032,52 @@
         synchronizeVideos(`.${itemId} .carousel-video`);
       });
     </script>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column content failure_recon">
+            <p>
+              When the optimized motion-text embedding fails to accurately reconstruct
+              the reference motion, the subsequent transfer to a new target typically
+              fails as well.
+            </p>
+            <table class="no-borders">
+              <colgroup>
+                <col style="width: 33%;">
+                <col style="width: 33%;">
+                <col style="width: 33%;">
+              </colgroup>
+              <tr>
+                <td>
+                  <video poster="" id="failure_recon_input" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/failure_recon_input.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="failure_recon_recon" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/failure_recon_recon.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+                <td>
+                  <video poster="" id="failure_recon_transfer" class="block-video bottom-padding" autoplay controls muted loop playsinline height="100%" preload="none" data-src="./static/videos/failure_recon_output.mp4">
+                    <!-- No source element to avoid initial loading -->
+                  </video>
+                </td>
+              </tr>
+              <tr>
+                <td class="has-text-centered small-text">Motion reference video</td>
+                <td class="has-text-centered small-text">Reconstruction given first frame of reference video</td>
+                <td class="has-text-centered small-text">Transfer given target image</td>
+              </tr>
+            </table>
+          </div>
+          <script>
+            // Synchronize videos
+            synchronizeVideos(`.failure_recon .block-video`);
+          </script>
+        </div>
+      </div>
+    </div>
     <!--/ Failure Cases. -->
     <!--/ Analysis. -->
   </div>
