@@ -1,5 +1,5 @@
 body {
-  font-family: 'Avenir', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .footer .icon-link {
@@ -18,7 +18,7 @@ body {
 }
 
 .teaser {
-  font-family: 'Avenir', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-title {
@@ -41,11 +41,11 @@ body {
 }
 
 .publication-title {
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Google Sans', sans-serif;
 }
 
 .publication-authors {
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Google Sans', sans-serif;
 }
 
 .publication-venue {
