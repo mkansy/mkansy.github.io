@@ -1,6 +1,6 @@
 - title: "Reenact Anything: Semantic Video Motion Transfer Using Motion-Textual Inversion"
   image: ra.gif
-  conference: Preprint
+  conference: ACM SIGGRAPH (Conference Track), 2025
   description: We propose motion-textual inversion, a general method to transfer the semantic motion of a given reference motion video to given target images. We thereby optimize a motion representation composed of a set of text/image embedding tokens using a frozen, pre-trained image-to-video diffusion model. Our method generalizes across various domains and supports multiple types of motions, including full-body, face, camera, and even hand-crafted motions.
   authors: Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Jacek Naruniec (DisneyResearch|Studios), Christopher Schroers (DisneyResearch|Studios), Markus Gross (DisneyResearch|Studios / ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
@@ -13,11 +13,11 @@
 
 - title: "No Training, No Problem: Rethinking Classifier-Free Guidance for Diffusion Models"
   image: icg.png
-  conference: Preprint
+  conference: International Conference on Learning Representations (ICLR), 2025
   description: We show that applying classifier-free guidance (CFG) does not require any specific training procedure (e.g., inserting a null condition during training), and CFG can be extended to a more general method that is applicable to any diffusion model, including unconditional ones.
   authors: Seyedmorteza Sadat (DisneyResearch|Studios / ETH Zurich), Manuel Kansy (DisneyResearch|Studios / ETH Zurich), Otmar Hilliges (ETH Zurich), Romann M. Weber (DisneyResearch|Studios)
   link:
-    url: https://arxiv.org/abs/2407.02687
+    url: https://openreview.net/pdf?id=b3CzCCCILJ
     display: Paper
   highlight: 1
 
