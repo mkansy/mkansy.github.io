@@ -6,7 +6,7 @@
 {% assign even_odd = number_printed | modulo: 2 %}
 {% if publi.highlight == 1 %}
 
-{% assign author_text = publi.authors | replace: 'Manuel Kansy (DisneyResearch|Studios / ETH Zurich)','</em><b>Manuel Kansy (DisneyResearch|Studios / ETH Zurich)</b><em>' %}
+{% assign author_text = publi.authors | replace: 'Manuel Kansy (DisneyResearch|Studios / ETH Zurich)','<span style="color:rgb(0,0,0);">Manuel Kansy (DisneyResearch|Studios / ETH Zurich)</span>' %}
 
 <div class="row">
 
@@ -18,7 +18,7 @@
   <pubtit>{{ publi.title }}</pubtit>
   <p style="color:rgb(128,128,128);"><em>{{ publi.conference }}</em></p>
   <p>{{ publi.description }}</p>
-  <p><em>{{ author_text }}</em></p>
+  <p style="color:rgb(128,128,128);"><em>{{ author_text }}</em></p>
   <p style="display:inline"><strong>
     <a href="{{ publi.link.url }}">{{ publi.link.display }}</a> {% if publi.link2 %} &nbsp; --- &nbsp; <a href="{{ publi.link2.url }}">{{ publi.link2.display }}</a>{% endif %} {% if publi.link3 %} &nbsp; --- &nbsp; <a href="{{ publi.link3.url }}">{{ publi.link3.display }}</a>{% endif %} {% if publi.link4 %} &nbsp; --- &nbsp; <a href="{{ publi.link4.url }}">{{ publi.link4.display }}</a>{% endif %}
   </strong></p>

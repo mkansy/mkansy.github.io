@@ -1,0 +1,34 @@
+- title: "Independent condition guidance for diffusion models"
+  authors: Seyedmorteza Sadat, Manuel Kansy, Romann Weber
+  patent_number: US Patent App. 19/034,441
+  url: https://patents.google.com/patent/US20250363600A1/en
+
+- title: "Time step guidance for diffusion models"
+  authors: Seyedmorteza Sadat, Manuel Kansy, Romann Weber
+  patent_number: US Patent App. 19/034,446
+  url: https://patents.google.com/patent/US20250363415A1/en
+
+- title: "Semantic video motion transfer using motion-textual inversion"
+  authors: Manuel Kansy, Jacek Naruniec, Christopher Schroers, Romann Weber
+  patent_number: US Patent App. 19/210,425
+  url: https://patents.google.com/patent/US20250356506A1/en
+
+- title: "Visual dubbing of an audiovisual sequence"
+  authors: Jacek Naruniec, Andrea Bionda, Manuel Kansy, Christopher Schroers, Romann Weber
+  patent_number: US Patent App. 18/642,219
+  url: https://patents.google.com/patent/US20250329083A1/en
+
+- title: "Subject-agnostic face swapping with low-rank adaptation"
+  authors: Manuel Kansy, Joel Neuner-Jehle, Jacek Naruniec, Romann Weber
+  patent_number: US Patent App. 19/094,056
+  url: https://patents.google.com/patent/US20250308117A1/en
+
+- title: "Generating an image including a source individual"
+  authors: Jacek Naruniec, Manuel Kansy, Graziana Mignone, Christopher Schroers, Romann Weber
+  patent_number: US Patent App. 18/320,117
+  url: https://patents.google.com/patent/US20230377213A1/en
+
+- title: "Identity-preserving image generation using diffusion models"
+  authors: Manuel Kansy, Anton Raël, Jacek Naruniec, Christopher Schroers, Romann Weber
+  patent_number: US Patent App. 18/320,857
+  url: https://patents.google.com/patent/US20230377214A1/en

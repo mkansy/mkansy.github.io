@@ -1,45 +1,84 @@
+- name: Gent Serifi
+  type: Intern
+  time: 06/2025 - 08/2025
+  url: https://gserifi.github.io/
+
+- name: Cyrill Imahorn
+  type: Intern
+  time: 05/2025 - 11/2025
+  url: https://www.linkedin.com/in/cyrill-imahorn-874185230/
+
+- name: Zefan Holliger
+  type: Master's Thesis
+  time: 03/2025 - 09/2025
+  url: https://www.linkedin.com/in/zefan-holliger/
+
+- name: Jackson Stanhope
+  type: PhD Student Co-Advisor
+  time: 02/2025 - 12/2025
+  url: https://www.linkedin.com/in/jackson-stanhope
+
+- name: Xinya Ji
+  type: PhD Student Co-Advisor
+  time: 02/2025 - 12/2025
+  url: https://jixinya.github.io/
+
 - name: Bastian Amrhein
   type: Master's Thesis
-  time: Fall 2024
+  time: 09/2024 - 03/2025
+  url: https://www.linkedin.com/in/bastian-amrhein/
 
 - name: Andrea Bionda
-  type: Master's Thesis
-  time: Fall 2023
+  type: Master's Thesis + Intern
+  time: 10/2023 - 08/2024
+  url: https://www.linkedin.com/in/abionda/
 
 - name: Joel Neuner-Jehle
   type: Master's Thesis
-  time: Fall 2023
+  time: 09/2023 - 03/2024
+  url: https://www.linkedin.com/in/joel-neuner-jehle/
 
 - name: Mathias Vogel
   type: Semester Thesis
-  time: Spring 2023
+  time: 02/2023 - 06/2023
+  url: https://www.linkedin.com/in/matvogel/
 
 - name: Danny Camenisch
   type: Bachelor's Thesis
-  time: Spring 2023
+  time: 02/2023 - 08/2023
+  url: https://www.linkedin.com/in/dcamenisch/
 
 - name: Burim Dervishaj
   type: Master's Thesis
-  time: Spring 2023
+  time: 02/2023 - 08/2023
+  url: https://www.linkedin.com/in/burim-dervishaj-7b322b270/
 
 - name: Christopher Raffl
   type: Master's Thesis
-  time: Fall 2022
+  time: 10/2022 - 04/2023
+  url: https://www.linkedin.com/in/christopher-raffl/
 
 - name: Federico Mantovani
   type: Bachelor's Thesis
-  time: Fall 2022
+  time: 09/2022 - 03/2023
+  url: https://fmantovani.ch/en
+
+- name: Julian Balletshofer
+  type: Intern
+  time: 08/2022 - 11/2022
+  url: https://zuseschoolrelai.de/people/scientists/julian-balletshofer/
 
 - name: Nayanika Debnath
   type: Bachelor's Thesis
-  time: Spring 2022
+  time: 02/2022 - 08/2022
+  url: https://www.linkedin.com/in/nayanika-debnath-9a186720a/
 
 - name: David Meyer
   type: Bachelor's Thesis
-  time: Spring 2022
+  time: 01/2022 - 07/2022
+  url: https://www.linkedin.com/in/david-meyer-117883144/
 
 - name: Anton Raël
-  type: Master's Thesis
-  time: Spring 2022
-
-
+  type: Master's Thesis + Intern
+  time: 01/2022 - 12/2022
+  url: https://www.linkedin.com/in/anton-rael/
