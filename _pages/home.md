@@ -5,7 +5,7 @@ sitemap: true
 permalink: /
 ---
 
-I am a **research scientist at [Luma AI](https://lumalabs.ai/)** working on **post training of large multi-modal models**.
+I am a **research scientist at [Luma AI](https://lumalabs.ai/)** working on **post-training of large multi-modal models**.
 My research interests include various areas of deep learning and especially generative modeling. 
 I always find it most fascinating and satisfying if I'm working on projects that interact with the environment in some way, i.e., where I can see/hear/feel its results.
 In recent years, I focused mostly on image and video generation and editing tasks.

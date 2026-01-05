@@ -11,7 +11,7 @@ tagline: Manuel Kansy's Website
 email: manuel.kansy@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   I am a research scientist at Luma AI 
-  working on post training of large multi-modal models.
+  working on post-training of large multi-modal models.
 domain: mkansy.github.io
 url: https://mkansy.github.io
 baseurl: 
