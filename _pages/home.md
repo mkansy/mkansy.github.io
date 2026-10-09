@@ -5,9 +5,9 @@ sitemap: true
 permalink: /
 ---
 
-I am a **research scientist at [Luma AI](https://lumalabs.ai/)** working on **post-training of large multi-modal models**.
-My research interests include various areas of deep learning and especially generative modeling. 
-I always find it most fascinating and satisfying if I'm working on projects that interact with the environment in some way, i.e., where I can see/hear/feel its results.
+I am a **research scientist at [Luma AI](https://lumalabs.ai/)** working on large multi-modal models. 
+My research interests include various areas of deep learning, generative modeling, and increasingly world models and physical AI. 
+I always find it most fascinating and satisfying if I'm working on projects that interact with the environment/world in some way, i.e., where I can see/hear/feel its results.
 In recent years, I focused mostly on image and video generation and editing tasks.
 
 Previously, I was an **associate research scientist** in the Facial VFX group at **[DisneyResearch\|Studios](https://studios.disneyresearch.com/)** led by [Dr. Derek Bradley](https://people.inf.ethz.ch/~bradleyd/).

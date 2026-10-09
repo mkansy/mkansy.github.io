@@ -25,8 +25,8 @@
 
 - title: "Generating an image including a source individual"
   authors: Jacek Naruniec, Manuel Kansy, Graziana Mignone, Christopher Schroers, Romann Weber
-  patent_number: US Patent App. 18/320,117
-  url: https://patents.google.com/patent/US20230377213A1/en
+  patent_number: US Patent 12,555,273
+  url: https://patents.google.com/patent/US12555273B2/en
 
 - title: "Identity-preserving image generation using diffusion models"
   authors: Manuel Kansy, Anton Raël, Jacek Naruniec, Christopher Schroers, Romann Weber

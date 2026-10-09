@@ -6,7 +6,9 @@
 {% assign even_odd = number_printed | modulo: 2 %}
 {% if publi.highlight == 1 %}
 
-{% assign author_text = publi.authors | replace: 'Manuel Kansy (DisneyResearch|Studios / ETH Zurich)','<span style="color:rgb(0,0,0);">Manuel Kansy (DisneyResearch|Studios / ETH Zurich)</span>' %}
+{% assign author_text = publi.authors | replace: 'Manuel Kansy (DisneyResearch|Studios / ETH Zurich)', '<span style="color:rgb(0,0,0);">Manuel Kansy (DisneyResearch|Studios / ETH Zurich)</span>' %}
+
+{% assign author_text = author_text | replace: 'Manuel Kansy (DisneyResearch|Studios)', '<span style="color:rgb(0,0,0);">Manuel Kansy (DisneyResearch|Studios)</span>' %}
 
 <div class="row">
 
